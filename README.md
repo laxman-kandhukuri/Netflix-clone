@@ -12,24 +12,6 @@
   <img src="./public/assets/pipeline.gif" alt="Logo" width="100%" height="100%">
   </div>
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#prerequests">Prerequests</a>
-    </li>
-    <li>
-      <a href="#which-features-this-project-deals-with">Which features this project deals with</a>
-    </li>
-    <li><a href="#third-party-libraries-used-except-for-react-and-rtk">Third Party libraries used except for React and RTK</a></li>
-    <li>
-      <a href="#contact">Contact</a>
-    </li>
-  </ol>
-</details>
-
-<br />
-# Netflix Clone DevOps Project
 
 ## Prerequisites:
 
@@ -72,14 +54,6 @@ This project establishes a robust DevOps environment for seamless software devel
 - **Kubernetes Manifest:** Modify for tailored application deployment on Kubernetes.
 - **Dockerfile:** Customize for building Docker images according to project requirements.
 
-## Usage:
-
-1. Clone the repository.
-2. Modify Jenkinsfile, Kubernetes Manifest, and Dockerfile based on project needs.
-3. Implement CI/CD pipelines, security scanning, and monitoring for a streamlined DevOps workflow.
-
-Feel free to reach out for any clarifications or additional details. Happy DevOps-ing!
-
 ## Server Requirements:
 
 We need four servers for our today’s Project:
@@ -91,9 +65,7 @@ We need four servers for our today’s Project:
 
 # Setup Instructions
 
-## Jenkins Server:
-
-### Launch Jenkins Instance:
+## Jenkins Instance:
 - **Name:** Provide a name for your Jenkins instance.
 - **OS:** Select Ubuntu 22.04 version.
 - **Instance Type:** Choose t2.large.
@@ -103,8 +75,6 @@ We need four servers for our today’s Project:
 - **Storage:** Increase capacity from 8GB to 35GB.
 
 ## Monitoring Server:
-
-### Launch Monitoring Instance:
 - **Name:** Provide a name for your Monitoring instance.
 - **OS:** Select Ubuntu 22.04 version.
 - **Instance Type:** Choose t2.medium (minimum 4GB RAM for monitoring tools).
@@ -112,10 +82,7 @@ We need four servers for our today’s Project:
 - **Networking:** Keep the default settings.
 - **Security Groups:** Open all inbound and outbound traffic.
 - **Storage:** Increase capacity from 8GB to 15GB.
-
-## Kubernetes Master & Worker Nodes:
-
-### Launch Kubernetes Master Instance:
+## Kubernetes Master Instance:
 - **Name:** Provide a name for your Kubernetes Master instance.
 - **OS:** Select Ubuntu 22.04 version.
 - **Number of Instances:** Replace 1 with 2 for two Kubernetes Nodes.
@@ -127,8 +94,6 @@ We need four servers for our today’s Project:
 Great! You've provided a set of commands for installing OpenJDK and Jenkins on your Jenkins Server. Let's summarize the steps:
 
 # Jenkins Server Setup
-
-## Log in to Jenkins Server:
 
 ### Connect to Jenkins Server:
 - Use SSH to connect to your Jenkins Server.
@@ -173,11 +138,12 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ### Continue Setup:
 - Paste the obtained password into the Jenkins web interface and click on Continue.
 
-## Jenkins Configuration:
+### Jenkins Configuration:
 
 ### Install Suggested Plugins:
-- Click on "Install suggested plugins."
-
+- Install Suggested Plugins:
+   - Click on "Install suggested plugins."
+   - You will get “Create First Admin User” or You can “Skip and Continue as Admin” and setup later
 ### Save and Finish:
 - Click on "Save and Finish."
 
@@ -231,37 +197,34 @@ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 ### Verify SonarQube Server:
 - Confirm that your SonarQube Server is accessible.
 
-# Installing Trivy on Jenkins Server
+## Installing Trivy on Jenkins Server
 
-## Install Required Packages:
+### Install Required Packages:
 ```bash
 sudo apt-get install wget apt-transport-https gnupg lsb-release
 ```
 
-## Add Trivy GPG Key:
+### Add Trivy GPG Key:
 ```bash
 wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
 ```
 
-## Add Trivy Repository:
+### Add Trivy Repository:
 ```bash
 echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
 ```
 
-## Update Package List:
+### Update Package List:
 ```bash
 sudo apt-get update
 ```
 
-## Install Trivy:
+### Install Trivy:
 ```bash
 sudo apt-get install trivy
 ```
-
-```
-
 Feel free to adjust the formatting or include additional details if needed. Let me know if you have any specific preferences or modifications you'd like to make!
-```markdown
+
 # Monitoring Server Setup - Prometheus, Node Exporter, and Grafana
 
 ## Install and Configure Prometheus:
@@ -416,6 +379,3 @@ curl -X POST http://localhost:9090/-/reload
 
 ### View Dashboards:
 - You will see your Node Exporter and Jenkins Monitoring dashboards in Grafana.
-```
-
-Feel free to customize the markdown or include additional details as needed. Let me know if you have any specific preferences or modifications you'd like to make!
