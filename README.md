@@ -91,8 +91,6 @@ We need four servers for our today’s Project:
 - **Networking:** Keep the default settings.
 - **Security Groups:** Open all inbound and outbound traffic.
 
-Great! You've provided a set of commands for installing OpenJDK and Jenkins on your Jenkins Server. Let's summarize the steps:
-
 # Jenkins Server Setup
 
 ### Connect to Jenkins Server:
