@@ -377,3 +377,90 @@ curl -X POST http://localhost:9090/-/reload
 
 ### View Dashboards:
 - You will see your Node Exporter and Jenkins Monitoring dashboards in Grafana.
+
+**Setting Up Jenkins Email Alerts:**
+
+1. **Install Email Extension Template Plugin:**
+   - Navigate to "Manage Jenkins" -> "Plugins."
+   - Install the "Email Extension Template" plugin.
+
+2. **Create App Password for Gmail:**
+   - Visit your Gmail account and go to "Manage account."
+   - Under the Security section, find "App passwords" and click on it.
+   - Gmail will ask for your password; provide it.
+   - Specify your app's name for integrating the email service.
+   - Save the generated password securely.
+
+3. **Add Gmail Credentials in Jenkins:**
+   - Go to "Manage Jenkins" -> "Credentials."
+   - Click on "(global)" and then "Add credentials."
+   - Choose "Username with password" as the kind.
+   - Provide your email ID and the generated app password.
+   - Set the ID as "mail" to easily reference both credentials.
+
+4. **Configure Email Notifications:**
+   - Navigate to "Jenkins" -> "Manage Jenkins" -> "System."
+   - Search for "Extend E-mail Notification."
+   - Provide "smtp.gmail.com" as the SMTP server and "465" as the SMTP port.
+   - Select "Use SMTP Authentication" and enter your Gmail ID and the generated app password in the Username and Password fields.
+   - Verify the email configuration by sending a test email.
+
+**Setting Up Jenkins Pipeline:**
+
+1. **Install Required Plugins:**
+   - Download and install the following plugins:
+     - Eclipse Temurin installer
+     - SonarQube Scanner
+     - NodeJS
+
+2. **Configure Plugins:**
+   - Go to "Manage Jenkins" -> "Tools."
+   - Add JDK by providing necessary details.
+   - Add NodeJS by providing the required information.
+
+3. **Configuring SonarQube:**
+   - Follow the steps for installing and configuring the SonarQube plugin. Ensure it is integrated into your Jenkins setup.
+
+**Configuring SonarQube:**
+
+1. **Access SonarQube:**
+   - Copy the public IP of your Jenkins Server along with port 9000.
+   - Navigate to SonarQube, click on "Security," and then on "Users."
+
+2. **Generate Token:**
+   - Click the highlighted blue box on the right to generate a token.
+   - Provide a name for your token and click "Generate."
+   - Copy the generated token and store it securely.
+
+3. **Add Token to Jenkins Credentials:**
+   - Go to "Manage Jenkins" -> "Credentials."
+   - Select "Secret text" in Kind.
+   - Provide your SonarQube token, and set the ID as "sonar-token" for future reference.
+
+4. **Configure SonarQube Server in Jenkins:**
+   - Go to "Manage Jenkins" -> "System."
+   - Click on "Add Sonarqube."
+   - Provide the name "sonar-server," set the Server URL, and choose the credentials you added.
+
+5. **Configure SonarQube Scanner:**
+   - Go to "Manage Jenkins" -> "Tools."
+   - Find SonarQube Scanner and click on "Add."
+   - Provide the name "sonar-server" and select the latest version of SonarQube.
+
+6. **Create Webhook in SonarQube:**
+   - Navigate to SonarQube, click on "Configuration," and select "Webhooks."
+   - Click "Create."
+   - Provide a name, Jenkins URL, and click "Create."
+
+7. **Create SonarQube Project:**
+   - Click "Manually" to create a project.
+   - Provide your project name and click "Set up."
+   - Select the existing token and continue.
+   - Choose "Other" as your build tool and "Linux" as the operating system.
+
+8. **Create Jenkins Pipeline:**
+   - Click "Create item" in Jenkins.
+   - Provide a name for your Jenkins Pipeline and select "Pipeline."
+   - Set up the pipeline for SonarQube analysis, quality gate check, and dependency installation.
+   - In the post-build, add email alerts for pipeline success or failure.
+
